@@ -1,3 +1,14 @@
 :root {
     background-color: whitesmoke
 }
+
+.title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    padding: 1rem;
+    background-color: #cfcfcf; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}

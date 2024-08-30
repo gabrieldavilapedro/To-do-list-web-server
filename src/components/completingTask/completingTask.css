@@ -1,0 +1,29 @@
+.completed {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.8s;
+    width: 160px;
+}
+
+.completed:hover {
+    background-color: #45a049;
+}
+
+.not-completed {
+    background-color: #FF5722; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.8s;
+    width: 160px; 
+}
+
+.not-completed:hover {
+    background-color: #e64a19;
+}
