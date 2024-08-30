@@ -31,19 +31,33 @@
     border-radius: 5px;
     background-color: #fff;
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .to-do-list > div > div:hover {
     transform: translateY(-5px);
-    box-shadow: 20px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilizar o título de cada tarefa */
 .to-do-list h3 {
-    margin: 0 0 10px 0;
+    color: var(--secondary-color);
+    margin: 0;
+    flex-grow: 1;
 }
 
 /* Estilizar a descrição de cada tarefa */
 .to-do-list p {
+    color: var(--text-color);
     margin: 0;
+    flex-grow: 2;
+}
+
+/* Estilizar a div interativa */
+.interactive {
+    margin-left: 20px;
+    flex-shrink: 0;
 }
