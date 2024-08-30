@@ -15,7 +15,6 @@ const RenderTasks = () => {
 
     return (
         <div className='to-do-list'>
-            <h1>Tarefas:</h1>
             <div >
                 {tasks.map(task => (
                     <div key={task.id}>
