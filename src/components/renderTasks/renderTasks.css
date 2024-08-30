@@ -1,0 +1,49 @@
+/* Estilizar o contêiner principal */
+.to-do-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Estilizar o título principal */
+.to-do-list h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Estilizar a lista de tarefas */
+.to-do-list > div {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilizar cada item de tarefa */
+.to-do-list > div > div {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.to-do-list > div > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 20px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilizar o título de cada tarefa */
+.to-do-list h3 {
+    margin: 0 0 10px 0;
+}
+
+/* Estilizar a descrição de cada tarefa */
+.to-do-list p {
+    margin: 0;
+}

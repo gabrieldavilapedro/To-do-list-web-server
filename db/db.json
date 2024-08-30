@@ -2,62 +2,26 @@
     "tasks": [
         {
             "id": 1,
-            "title": "Tarefa 1",
-            "description": "Descrição da tarefa 1",
+            "title": "Beber água",
+            "description": "beber 2 litros de água",
             "check": false
         },
         {
             "id": 2,
-            "title": "Tarefa 2",
-            "description": "Descrição da tarefa 2",
+            "title": "Fazer exercícios",
+            "description": "Fazer 30 minutos de exercícios",
             "check": true
         },
         {
             "id": 3,
-            "title": "Tarefa 3",
-            "description": "Descrição da tarefa 3",
+            "title": "Estudar",
+            "description": "Estudar 1 hora",
             "check": false
         },
         {
             "id": 4,
-            "title": "Tarefa 4",
-            "description": "Descrição da tarefa 4",
-            "check": true
-        },
-        {
-            "id": 5,
-            "title": "Tarefa 5",
-            "description": "Descrição da tarefa 5",
-            "check": false
-        },
-        {
-            "id": 6,
-            "title": "Tarefa 6",
-            "description": "Descrição da tarefa 6",
-            "check": true
-        },
-        {
-            "id": 7,
-            "title": "Tarefa 7",
-            "description": "Descrição da tarefa 7",
-            "check": false
-        },
-        {
-            "id": 8,
-            "title": "Tarefa 8",
-            "description": "Descrição da tarefa 8",
-            "check": true
-        },
-        {
-            "id": 9,
-            "title": "Tarefa 9",
-            "description": "Descrição da tarefa 9",
-            "check": false
-        },
-        {
-            "id": 10,
-            "title": "Tarefa 10",
-            "description": "Descrição da tarefa 10",
+            "title": "Se divertir",
+            "description": "Assistir um filme ou série",
             "check": true
         }
     ]
