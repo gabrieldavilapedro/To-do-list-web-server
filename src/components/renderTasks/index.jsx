@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './renderTasks.css';
 
 const RenderTasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -11,9 +12,9 @@ const RenderTasks = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Tasks:</h1>
-            <div className='todo-list'>
+        <div className='to-do-list'>
+            <h1>Tarefas:</h1>
+            <div >
                 {tasks.map(task => (
                     <div key={task.id}>
                         <h3>{task.title}</h3>

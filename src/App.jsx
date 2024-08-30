@@ -1,5 +1,5 @@
-import 'styles/App.css'
-import RenderTasks from './components/RenderTasks'
+import './App.css'
+import NewTaskForm from './components/newTask'
 function App() {
 
   return (
@@ -8,7 +8,7 @@ function App() {
         <header className="App-header">
           <h1>To-do-list</h1>
         </header>
-        <RenderTasks />
+        <NewTaskForm />
       </div>
     </>
   )
