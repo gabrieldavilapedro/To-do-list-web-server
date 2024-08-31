@@ -12,3 +12,17 @@
     font-family: 'Arial', sans-serif;
     width: 100%;
 }
+
+button{
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.8s;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+}

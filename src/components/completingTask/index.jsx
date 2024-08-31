@@ -1,17 +1,15 @@
-import './completingTask.css';
 import PropTypes from 'prop-types';
+import checkedIcon from '../../assets/checked-icon.svg';
+import uncheckedIcon from '../../assets/unchecked-icon.svg';
 
         const CompletingTask = ({ checked, id, toggleCheck}) => {
-
-            return (
-                <div>
-                <button 
-                    onClick={()=> toggleCheck(id, !checked)} 
-                    className={checked ? 'completed' : 'not-completed'}
-                >
-                    {!checked ? 'Completar tarefa' : 'Descompletar tarefa'}
-                </button>
-            </div>
+            if (checked) {
+                return (
+                    <img onClick={()=> toggleCheck(id, false)} src={checkedIcon} alt='icon' />
+                );
+            }
+            return (                
+                <img onClick={()=> toggleCheck(id, true)} src={uncheckedIcon} alt='icon' />
             );
         };
 

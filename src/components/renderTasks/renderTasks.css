@@ -56,8 +56,20 @@
     flex-grow: 2;
 }
 
-/* Estilizar a div interativa */
-.interactive {
-    margin-left: 20px;
-    flex-shrink: 0;
+.checked {
+    filter: opacity(0.6);
+}
+
+.checked:hover {
+    filter: none;
+}
+
+.task-text {
+    width: 80%;
+    padding: 0 15px;
+}
+
+.task-text h3 {
+    white-space: nowrap;
+    overflow: hidden;
 }

@@ -22,7 +22,9 @@ const TaskForm = ({ addTask }) => {
                 placeholder="Título da tarefa"
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
+                maxLength={30}
                 required
+                
             />
             <input
                 type="text"
@@ -31,7 +33,7 @@ const TaskForm = ({ addTask }) => {
                 onChange={(e) => setNewTaskDescription(e.target.value)}
                 required
             />
-            <button type="submit">Adicionar Tarefa</button>
+            <button type="submit">Adicionar</button>
         </form>
         </div>
     );
