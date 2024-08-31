@@ -1,11 +1,10 @@
-import './App.css'
-import RenderTasks from './components/renderTasks'
+import './App.css';
+import RenderTasks from './components/renderTasks';
 function App() {
-
   return (
     <>
       <div className="App">
-        <div className='title'>
+        <div className="title">
           <h1>Lista de tarefas</h1>
         </div>
         <header className="App-header">
@@ -13,7 +12,7 @@ function App() {
         </header>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
