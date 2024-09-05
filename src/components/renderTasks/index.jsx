@@ -3,6 +3,7 @@ import './renderTasks.css';
 import CompletingTask from '../completingTask';
 import NewTask from '../newTask';
 import DeleteTask from '../deleteTask';
+import { getTasks } from '../../requests/tasks';
 
 const RenderTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -10,17 +11,13 @@ const RenderTasks = () => {
   const sortedTasks = tasks.sort((a, b) => a.check - b.check);
 
   useEffect(() => {
-    fetch('http://localhost:3001/tasks')
-      .then((response) => response.json())
-      .then((data) => setTasks(data))
-      .catch((error) => console.log(error));
+    getTasks().then((tasks) => setTasks(tasks));
   }, []);
 
   const addTask = (title, description) => {
     const newTask = {
       title,
       description,
-      check: false,
     };
 
     fetch('http://localhost:3001/tasks', {
