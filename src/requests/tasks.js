@@ -37,3 +37,12 @@ export const toggleCheck = async (id) => {
   await api.put(`/tasks/${id}`, updatedTask);
   return getTasks();
 };
+
+export const updateTask = async (id, title, description) => {
+  const updatedTask = {
+    title,
+    description,
+  };
+  await api.put(`/tasks/${id}`, updatedTask);
+  return getTasks();
+}
