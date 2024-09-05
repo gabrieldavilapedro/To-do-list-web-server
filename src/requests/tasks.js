@@ -27,6 +27,13 @@ export const addTask = async (title, description) => {
 
 export const deleteTask = async (id) => {
   await api.delete(`/tasks/${id}`);
-}
+};
 
-
+export const toggleCheck = async (id) => {
+  const task = await getTaskById(id);
+  const updatedTask = {
+    check: !task.check,
+  };
+  await api.put(`/tasks/${id}`, updatedTask);
+  return getTasks();
+};

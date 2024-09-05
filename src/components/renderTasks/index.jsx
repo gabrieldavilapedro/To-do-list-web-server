@@ -14,30 +14,6 @@ const RenderTasks = () => {
     getTasks().then((tasks) => setTasks(tasks));
   }, []);
 
-  const toggleCheck = (id, check) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id !== id) return task;
-
-      return {
-        ...task,
-        check,
-      };
-    });
-    setTasks(newTasks);
-
-    const task = tasks.find((task) => task.id === id);
-
-    fetch(`http://localhost:3001/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...task, check }),
-    })
-      .then(() => setTasks(newTasks))
-      .catch((error) => console.log(error));
-  };
-
   return (
     <div className="to-do-list">
       <div>
@@ -47,7 +23,7 @@ const RenderTasks = () => {
             <CompletingTask
               id={task.id}
               checked={task.check}
-              toggleCheck={toggleCheck}
+              setTasks={setTasks}
             />
             <div className="task-text">
               <h3>{task.title}</h3>
