@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './newTask.css';
+import { addTask } from '../../requests/tasks';
 
-const TaskForm = ({ addTask }) => {
+const TaskForm = ({ setTasks }) => {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
 
   const handleAddTask = (e) => {
     e.preventDefault();
-    addTask(newTaskTitle, newTaskDescription);
+    addTask(newTaskTitle, newTaskDescription).then((task) => {
+      setTasks((tasks) => [...tasks, task]);
+    });
     setNewTaskTitle('');
     setNewTaskDescription('');
   };
@@ -39,7 +42,7 @@ const TaskForm = ({ addTask }) => {
 };
 
 TaskForm.propTypes = {
-  addTask: PropTypes.func.isRequired,
+  setTasks: PropTypes.func.isRequired,
 };
 
 export default TaskForm;

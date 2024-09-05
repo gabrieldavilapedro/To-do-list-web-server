@@ -14,26 +14,6 @@ const RenderTasks = () => {
     getTasks().then((tasks) => setTasks(tasks));
   }, []);
 
-  const addTask = (title, description) => {
-    const newTask = {
-      title,
-      description,
-    };
-
-    fetch('http://localhost:3001/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTask),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setTasks([...tasks, data]);
-      })
-      .catch((error) => console.log(error));
-  };
-
   const deleteTask = (id) => {
     fetch(`http://localhost:3001/tasks/${id}`, {
       method: 'DELETE',
@@ -72,7 +52,7 @@ const RenderTasks = () => {
   return (
     <div className="to-do-list">
       <div>
-        <NewTask addTask={addTask} />
+        <NewTask setTasks={setTasks} />
         {sortedTasks.map((task) => (
           <div className={task.check ? 'checked' : null} key={task.id}>
             <CompletingTask

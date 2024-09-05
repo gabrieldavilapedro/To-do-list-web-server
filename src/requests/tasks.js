@@ -6,14 +6,23 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// Função para obter todas as tarefas
 export const getTasks = async () => {
   const response = await api.get('/tasks');
   return response.data;
 };
 
-// funcao para pegar uma tarefa pelo id
 export const getTaskById = async (id) => {
   const response = await api.get(`/tasks/${id}`);
   return response.data;
 };
+
+export const addTask = async (title, description) => {
+  const newTask = {
+    title,
+    description,
+  };
+  const response = await api.post('/tasks', newTask);
+  return response.data;
+};
+
+
