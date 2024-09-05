@@ -14,17 +14,6 @@ const RenderTasks = () => {
     getTasks().then((tasks) => setTasks(tasks));
   }, []);
 
-  const deleteTask = (id) => {
-    fetch(`http://localhost:3001/tasks/${id}`, {
-      method: 'DELETE',
-    })
-      .then(() => {
-        const newTasks = tasks.filter((task) => task.id !== id);
-        setTasks(newTasks);
-      })
-      .catch((error) => console.log(error));
-  };
-
   const toggleCheck = (id, check) => {
     const newTasks = tasks.map((task) => {
       if (task.id !== id) return task;
@@ -64,7 +53,7 @@ const RenderTasks = () => {
               <h3>{task.title}</h3>
               <p>{task.description}</p>
             </div>
-            <DeleteTask id={task.id} deleteTask={deleteTask} />
+            <DeleteTask id={task.id} setTasks={setTasks} />
           </div>
         ))}
       </div>

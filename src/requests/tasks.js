@@ -25,4 +25,8 @@ export const addTask = async (title, description) => {
   return response.data;
 };
 
+export const deleteTask = async (id) => {
+  await api.delete(`/tasks/${id}`);
+}
+
 
