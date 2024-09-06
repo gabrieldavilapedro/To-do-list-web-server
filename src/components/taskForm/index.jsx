@@ -1,22 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import './newTask.css';
+import './taskForm.css';
 
-const TaskForm = ({ addTask }) => {
+const TaskForm = ({
+  onSubmit,
+  title,
+  submitTitle,
+  taskTitle,
+  taskDescription,
+}) => {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
 
-  const handleAddTask = (e) => {
+  useEffect(() => {
+    setNewTaskTitle(taskTitle || '');
+    setNewTaskDescription(taskDescription || '');
+  }, [taskTitle, taskDescription]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(newTaskTitle, newTaskDescription);
+    onSubmit(newTaskTitle, newTaskDescription);
     setNewTaskTitle('');
     setNewTaskDescription('');
   };
 
   return (
     <div className="New-task">
-      <h2>Adicionar nova tarefa</h2>
-      <form onSubmit={handleAddTask}>
+      <h2>{title}</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Título da tarefa"
@@ -32,14 +43,18 @@ const TaskForm = ({ addTask }) => {
           onChange={(e) => setNewTaskDescription(e.target.value)}
           required
         />
-        <button type="submit">Adicionar</button>
+        <button type="submit">{submitTitle}</button>
       </form>
     </div>
   );
 };
 
 TaskForm.propTypes = {
-  addTask: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  submitTitle: PropTypes.string.isRequired,
+  taskTitle: PropTypes.string,
+  taskDescription: PropTypes.string,
 };
 
 export default TaskForm;

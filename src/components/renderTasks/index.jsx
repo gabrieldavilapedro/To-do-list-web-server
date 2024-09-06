@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import './renderTasks.css';
-import CompletingTask from '../completingTask';
-import NewTask from '../newTask';
-import DeleteTask from '../deleteTask';
+import TaskForm from '../taskForm';
+import pencil from '../../assets/pencil-icon.svg';
+import trashCan from '../../assets/trash-can-icon.svg';
+import checkedIcon from '../../assets/checked-icon.svg';
+import uncheckedIcon from '../../assets/unchecked-icon.svg';
 
 const RenderTasks = () => {
   const [tasks, setTasks] = useState([]);
+  const [editId, setEditId] = useState(null);
 
   const sortedTasks = tasks.sort((a, b) => a.check - b.check);
 
@@ -16,7 +19,7 @@ const RenderTasks = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const addTask = (title, description) => {
+  const createTask = (title, description) => {
     const newTask = {
       title,
       description,
@@ -48,7 +51,7 @@ const RenderTasks = () => {
       .catch((error) => console.log(error));
   };
 
-  const toggleCheck = (id, check) => {
+  const updateCheck = (id, check) => {
     const newTasks = tasks.map((task) => {
       if (task.id !== id) return task;
 
@@ -72,22 +75,75 @@ const RenderTasks = () => {
       .catch((error) => console.log(error));
   };
 
+  const updateTask = (id, title, description) => {
+    const task = tasks.find((task) => task.id === id);
+
+    fetch(`http://localhost:3001/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...task, title, description }),
+    })
+      .then(() => {
+        const newTasks = tasks.map((task) => {
+          if (task.id !== id) return task;
+
+          return {
+            ...task,
+            title,
+            description,
+          };
+        });
+        setTasks(newTasks);
+        setEditId(null);
+      })
+
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="to-do-list">
       <div>
-        <NewTask addTask={addTask} />
+        {editId ? (
+          <TaskForm
+            onSubmit={(title, description) =>
+              updateTask(editId, title, description)
+            }
+            title={'Editar tarefa'}
+            submitTitle={'Editar'}
+            taskTitle={tasks.find((task) => task.id === editId).title}
+            taskDescription={
+              tasks.find((task) => task.id === editId).description
+            }
+          />
+        ) : (
+          <TaskForm
+            onSubmit={createTask}
+            title={'Adicionar nova tarefa'}
+            submitTitle={'Adicionar'}
+          />
+        )}
         {sortedTasks.map((task) => (
           <div className={task.check ? 'checked' : null} key={task.id}>
-            <CompletingTask
-              id={task.id}
-              checked={task.check}
-              toggleCheck={toggleCheck}
+            <img
+              onClick={() => updateCheck(task.id, !task.check)}
+              src={task.check ? checkedIcon : uncheckedIcon}
+              alt="icon"
             />
             <div className="task-text">
               <h3>{task.title}</h3>
               <p>{task.description}</p>
             </div>
-            <DeleteTask id={task.id} deleteTask={deleteTask} />
+            <img 
+              onClick={() => setEditId(task.id)}
+              src={pencil} 
+              alt="icon" />
+            <img
+              onClick={() => deleteTask(task.id)}
+              src={trashCan}
+              alt="icon"
+            />
           </div>
         ))}
       </div>
