@@ -5,6 +5,12 @@ import pencil from '../../assets/pencil-icon.svg';
 import trashCan from '../../assets/trash-can-icon.svg';
 import checkedIcon from '../../assets/checked-icon.svg';
 import uncheckedIcon from '../../assets/unchecked-icon.svg';
+import {
+  getAllTasks,
+  createTask,
+  deleteTask,
+  updateTask,
+} from '../../requests/tasks';
 
 const RenderTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -13,37 +19,21 @@ const RenderTasks = () => {
   const sortedTasks = tasks.sort((a, b) => a.check - b.check);
 
   useEffect(() => {
-    fetch('http://localhost:3001/tasks')
-      .then((response) => response.json())
+    getAllTasks()
       .then((data) => setTasks(data))
       .catch((error) => console.log(error));
   }, []);
 
-  const createTask = (title, description) => {
-    const newTask = {
-      title,
-      description,
-      check: false,
-    };
-
-    fetch('http://localhost:3001/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newTask),
-    })
-      .then((response) => response.json())
+  const handleSubmitNewTask = (title, description) => {
+    createTask(title, description)
       .then((data) => {
         setTasks([...tasks, data]);
       })
       .catch((error) => console.log(error));
   };
 
-  const deleteTask = (id) => {
-    fetch(`http://localhost:3001/tasks/${id}`, {
-      method: 'DELETE',
-    })
+  const handleDeleteTask = (id) => {
+    deleteTask(id)
       .then(() => {
         const newTasks = tasks.filter((task) => task.id !== id);
         setTasks(newTasks);
@@ -51,40 +41,26 @@ const RenderTasks = () => {
       .catch((error) => console.log(error));
   };
 
-  const updateCheck = (id, check) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id !== id) return task;
-
-      return {
-        ...task,
-        check,
-      };
-    });
-    setTasks(newTasks);
-
+  const handleUpdateCheck = (id, check) => {
     const task = tasks.find((task) => task.id === id);
+    updateTask(id, { ...task, check })
+      .then(() => {
+        const newTasks = tasks.map((task) => {
+          if (task.id !== id) return task;
 
-    fetch(`http://localhost:3001/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...task, check }),
-    })
-      .then(() => setTasks(newTasks))
+          return {
+            ...task,
+            check,
+          };
+        });
+        setTasks(newTasks);
+      })
       .catch((error) => console.log(error));
   };
 
-  const updateTask = (id, title, description) => {
+  const handleUpdateTask = (id, title, description) => {
     const task = tasks.find((task) => task.id === id);
-
-    fetch(`http://localhost:3001/tasks/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...task, title, description }),
-    })
+    updateTask(id, { ...task, title, description })
       .then(() => {
         const newTasks = tasks.map((task) => {
           if (task.id !== id) return task;
@@ -108,7 +84,7 @@ const RenderTasks = () => {
         {editId ? (
           <TaskForm
             onSubmit={(title, description) =>
-              updateTask(editId, title, description)
+              handleUpdateTask(editId, title, description)
             }
             title={'Editar tarefa'}
             submitTitle={'Editar'}
@@ -119,7 +95,7 @@ const RenderTasks = () => {
           />
         ) : (
           <TaskForm
-            onSubmit={createTask}
+            onSubmit={handleSubmitNewTask}
             title={'Adicionar nova tarefa'}
             submitTitle={'Adicionar'}
           />
@@ -127,7 +103,7 @@ const RenderTasks = () => {
         {sortedTasks.map((task) => (
           <div className={task.check ? 'checked' : null} key={task.id}>
             <img
-              onClick={() => updateCheck(task.id, !task.check)}
+              onClick={() => handleUpdateCheck(task.id, !task.check)}
               src={task.check ? checkedIcon : uncheckedIcon}
               alt="icon"
             />
@@ -135,12 +111,9 @@ const RenderTasks = () => {
               <h3>{task.title}</h3>
               <p>{task.description}</p>
             </div>
-            <img 
-              onClick={() => setEditId(task.id)}
-              src={pencil} 
-              alt="icon" />
+            <img onClick={() => setEditId(task.id)} src={pencil} alt="icon" />
             <img
-              onClick={() => deleteTask(task.id)}
+              onClick={() => handleDeleteTask(task.id)}
               src={trashCan}
               alt="icon"
             />

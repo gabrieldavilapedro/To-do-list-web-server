@@ -75,3 +75,7 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+img {
+  margin: 5px;
+}
