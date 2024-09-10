@@ -16,7 +16,12 @@ const RenderTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  const sortedTasks = tasks.sort((a, b) => a.check - b.check);
+  const sortedTasks = tasks.sort((a, b) => {
+    if (a.check !== b.check) {
+      return a.check - b.check;
+    }
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
 
   useEffect(() => {
     getAllTasks()
