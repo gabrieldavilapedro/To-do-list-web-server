@@ -87,7 +87,7 @@ const RenderTasks = () => {
               handleUpdateTask(editId, title, description)
             }
             title={'Editar tarefa'}
-            submitTitle={'Editar'}
+            submitTitle={'Salvar'}
             taskTitle={tasks.find((task) => task.id === editId).title}
             taskDescription={
               tasks.find((task) => task.id === editId).description

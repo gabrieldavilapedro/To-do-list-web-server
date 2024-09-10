@@ -45,8 +45,8 @@ Após estar com o back-end rodando, siga estes passos:
 
 4.  **Rode o servidor com o seguinte comando:**
 
-        ```bash
-        npm run dev
-        ```
+    ```bash
+    npm run dev
+    ```
 
 Após seguir estes passos, você será capaz de utilizar a aplicação por completo, podendo adicionar novas tarefas, atualizá-las, excluí-las e listar todas as suas tarefas.
